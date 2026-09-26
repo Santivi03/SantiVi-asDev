@@ -99,6 +99,22 @@ nav {
     gap: 2rem;
 }
 
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 101;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
 .nav-links a {
     color: var(--color-text);
     text-decoration: none;
@@ -586,32 +602,45 @@ footer {
     /* Navegación */
     header {
         padding: 1rem 5%;
-        background: rgba(5,5,5,0.95); /* Fondo sólido para que no se mezcle */
+        background: rgba(5,5,5,0.98); /* Fondo casi sólido para el menú abierto */
         border-bottom: 1px solid var(--glass-border);
     }
     nav {
-        flex-direction: column;
-        gap: 0.8rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .hamburger {
+        display: flex;
     }
     .nav-links {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
+        display: none; /* Oculto por defecto en móvil */
+        flex-direction: column;
         width: 100%;
-        justify-content: flex-start;
-        gap: 1rem;
-        padding-bottom: 0.5rem;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
     }
-    .nav-links::-webkit-scrollbar {
-        height: 4px;
-    }
-    .nav-links::-webkit-scrollbar-thumb {
-        background: var(--color-primary);
-        border-radius: 4px;
+    .nav-links.active {
+        display: flex;
+        animation: fadeIn 0.3s ease-out;
     }
     .nav-links a {
-        font-size: 0.85rem;
-        white-space: nowrap;
+        font-size: 1.1rem;
+        display: block;
+        padding: 0.5rem;
+    }
+    
+    /* Animación del Hamburger al estar activo */
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
     }
     
     /* Espaciado General */
