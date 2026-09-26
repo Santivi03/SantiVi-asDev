@@ -1,11 +1,11 @@
 :root {
     --color-bg: #050505;
-    --color-primary: #ff1a1a;
-    --color-primary-glow: rgba(255, 26, 26, 0.6);
+    --color-primary: #00aaff;
+    --color-primary-glow: rgba(0, 170, 255, 0.6);
     --color-text: #ffffff;
     --color-text-muted: #a0a0a0;
     --glass-bg: rgba(15, 15, 15, 0.4);
-    --glass-border: rgba(255, 26, 26, 0.2);
+    --glass-border: rgba(0, 170, 255, 0.2);
     --font-heading: 'Rajdhani', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -237,7 +237,7 @@ section {
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(255, 26, 26, 0.2) inset;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.2) inset;
     cursor: pointer;
 }
 
@@ -263,7 +263,7 @@ section {
 
 .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(255, 26, 26, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 170, 255, 0.15);
     border-color: var(--color-primary);
 }
 
@@ -311,8 +311,8 @@ section {
 .tech-stack span {
     font-size: 0.75rem;
     padding: 0.3rem 0.8rem;
-    background: rgba(255, 26, 26, 0.1);
-    border: 1px solid rgba(255, 26, 26, 0.3);
+    background: rgba(0, 170, 255, 0.1);
+    border: 1px solid rgba(0, 170, 255, 0.3);
     border-radius: 20px;
     color: var(--color-primary);
     font-family: var(--font-heading);
@@ -346,17 +346,17 @@ section {
     font-weight: 600;
     transition: all 0.3s ease;
     padding: 0.8rem 1.8rem;
-    background: rgba(255, 26, 26, 0.05);
-    border: 1px solid rgba(255, 26, 26, 0.3);
+    background: rgba(0, 170, 255, 0.05);
+    border: 1px solid rgba(0, 170, 255, 0.3);
     border-radius: 30px;
     font-family: var(--font-body);
 }
 
 .contact-email:hover {
-    background: rgba(255, 26, 26, 0.15);
+    background: rgba(0, 170, 255, 0.15);
     color: var(--color-primary);
     border-color: var(--color-primary);
-    box-shadow: 0 0 20px rgba(255, 26, 26, 0.3);
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
     transform: translateY(-2px);
 }
 
@@ -386,7 +386,7 @@ section {
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 10px rgba(255, 26, 26, 0.2);
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
 }
 
 /* About Section */
@@ -441,7 +441,7 @@ section {
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(255, 26, 26, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 170, 255, 0.15);
     border-color: var(--color-primary);
 }
 
@@ -569,8 +569,8 @@ section {
 }
 
 .chip {
-    background: rgba(255, 26, 26, 0.05);
-    border: 1px solid rgba(255, 26, 26, 0.3);
+    background: rgba(0, 170, 255, 0.05);
+    border: 1px solid rgba(0, 170, 255, 0.3);
     color: var(--color-text);
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -580,7 +580,7 @@ section {
 }
 
 .chip:hover {
-    background: rgba(255, 26, 26, 0.2);
+    background: rgba(0, 170, 255, 0.2);
     border-color: var(--color-primary);
     color: var(--color-primary);
     box-shadow: 0 0 15px var(--color-primary-glow);
