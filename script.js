@@ -1,184 +1,173 @@
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
+// Fondo de estrellas: puntos finos que derivan despacio.
+// Con "reducir movimiento" se dibujan una sola vez y quedan quietas.
+(function starfield() {
+    const canvas = document.getElementById('starfield');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-let width, height;
-let stars = [];
-let mouseX = -1000;
-let mouseY = -1000;
-let isMouseActive = false;
+    let width = 0;
+    let height = 0;
+    let stars = [];
+    let frame = null;
+    let lastTime = 0;
 
-function init() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    
-    stars = [];
-    const numStars = window.innerWidth < 768 ? 80 : 150; // Menos cantidad para que se distingan bien
-    
-    for (let i = 0; i < numStars; i++) {
-        stars.push(new Star());
+    function makeStar() {
+        const depth = Math.random();
+        return {
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: 0.4 + depth * 1.1,
+            speed: 2 + depth * 8, // px por segundo
+            alpha: 0.25 + depth * 0.55,
+            twinkle: Math.random() * Math.PI * 2,
+            blue: Math.random() < 0.18
+        };
     }
-}
 
-// Función para dibujar una estrella real de N puntas
-function drawStarShape(ctx, cx, cy, spikes, outerRadius, innerRadius) {
-    let rot = Math.PI / 2 * 3;
-    let x = cx;
-    let y = cy;
-    let step = Math.PI / spikes;
+    function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    ctx.beginPath();
-    ctx.moveTo(cx, cy - outerRadius);
-    for (let i = 0; i < spikes; i++) {
-        x = cx + Math.cos(rot) * outerRadius;
-        y = cy + Math.sin(rot) * outerRadius;
-        ctx.lineTo(x, y);
-        rot += step;
-
-        x = cx + Math.cos(rot) * innerRadius;
-        y = cy + Math.sin(rot) * innerRadius;
-        ctx.lineTo(x, y);
-        rot += step;
+        const count = Math.round(Math.min(220, (width * height) / 7000));
+        stars = Array.from({ length: count }, makeStar);
+        draw(0);
     }
-    ctx.lineTo(cx, cy - outerRadius);
-    ctx.closePath();
-}
 
-class Star {
-    constructor() {
-        this.reset(true);
-    }
-    
-    reset(randomizePosition = false) {
-        this.x = randomizePosition ? Math.random() * width : Math.random() * width;
-        this.y = randomizePosition ? Math.random() * height : height + 20;
-        
-        // Estrellas de 4 puntas (estilo destello futurista)
-        this.spikes = 4;
-        this.outerRadius = Math.random() * 3 + 2.5; // Tamaño más notable
-        this.innerRadius = this.outerRadius / 3;
-        
-        // Velocidad base más lenta para que no parezca que nadan
-        this.baseSpeedX = (Math.random() - 0.5) * 0.4;
-        this.baseSpeedY = -(Math.random() * 0.5 + 0.3);
-        
-        this.speedX = this.baseSpeedX;
-        this.speedY = this.baseSpeedY;
-        
-        this.alpha = Math.random() * 0.6 + 0.2;
-        this.pulse = Math.random() * 0.02 + 0.01;
-        
-        // Color aleatorio: Rojo o Azul neón
-        if (Math.random() > 0.5) {
-            this.colorRGB = '255, 26, 26';
-            this.shadowColor = '#ff1a1a';
-        } else {
-            this.colorRGB = '26, 140, 255';
-            this.shadowColor = '#1a8cff';
-        }
-    }
-    
-    update() {
-        // Atracción hacia el mouse
-        if (isMouseActive) {
-            const dx = mouseX - this.x;
-            const dy = mouseY - this.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            // Si el mouse está cerca (radio de 250px), son atraídas sutilmente
-            if (distance < 250) {
-                const force = (250 - distance) / 250;
-                this.speedX += (dx / distance) * force * 0.15;
-                this.speedY += (dy / distance) * force * 0.15;
+    function draw(dt) {
+        ctx.clearRect(0, 0, width, height);
+        for (const s of stars) {
+            if (dt) {
+                s.y -= s.speed * dt;
+                s.twinkle += dt * 0.8;
+                if (s.y < -4) {
+                    s.y = height + 4;
+                    s.x = Math.random() * width;
+                }
             }
-        } else {
-            // Si el mouse no está, vuelven suavemente a su rumbo original
-            this.speedX += (this.baseSpeedX - this.speedX) * 0.02;
-            this.speedY += (this.baseSpeedY - this.speedY) * 0.02;
-        }
-
-        // Fricción para que no aceleren infinitamente
-        this.speedX *= 0.95;
-        this.speedY *= 0.95;
-        
-        this.x += this.speedX;
-        this.y += this.speedY;
-        
-        // Efecto de titileo (pulse)
-        this.alpha += this.pulse;
-        if (this.alpha > 0.9 || this.alpha < 0.2) {
-            this.pulse *= -1;
-        }
-        
-        // Reaparecer cuando salen de la pantalla
-        if (this.y < -30 || this.y > height + 30 || this.x < -30 || this.x > width + 30) {
-            this.reset(false);
-            if (Math.random() > 0.5) {
-                this.x = Math.random() > 0.5 ? -20 : width + 20;
-                this.y = Math.random() * height;
-            } else {
-                this.x = Math.random() * width;
-                this.y = Math.random() > 0.5 ? -20 : height + 20;
-            }
+            const a = s.alpha * (0.75 + 0.25 * Math.sin(s.twinkle));
+            ctx.fillStyle = s.blue ? `rgba(61, 174, 255, ${a})` : `rgba(237, 241, 247, ${a})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
-    
-    draw() {
-        drawStarShape(ctx, this.x, this.y, this.spikes, this.outerRadius, this.innerRadius);
-        
-        ctx.fillStyle = `rgba(${this.colorRGB}, ${this.alpha})`;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = this.shadowColor;
-        ctx.fill();
-        
-        ctx.shadowBlur = 0; // Reset
-    }
-}
 
-function animate() {
-    // Limpiamos todo el canvas SIN DEJAR RASTRO
-    // Esto elimina el efecto de "cola" para que no parezcan espermatozoides
-    ctx.clearRect(0, 0, width, height);
-    
-    stars.forEach(star => {
-        star.update();
-        star.draw();
+    function loop(time) {
+        const dt = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 0;
+        lastTime = time;
+        draw(dt);
+        frame = requestAnimationFrame(loop);
+    }
+
+    function start() {
+        if (frame || reduceMotion.matches || document.hidden) return;
+        lastTime = 0;
+        frame = requestAnimationFrame(loop);
+    }
+
+    function stop() {
+        if (frame) cancelAnimationFrame(frame);
+        frame = null;
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(resize, 150);
     });
-    
-    requestAnimationFrame(animate);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    reduceMotion.addEventListener('change', () => (reduceMotion.matches ? (stop(), draw(0)) : start()));
+
+    resize();
+    start();
+})();
+
+// Header: fondo sólido al hacer scroll
+const header = document.getElementById('site-header');
+
+function updateHeader() {
+    header.classList.toggle('is-scrolled', window.scrollY > 12);
+}
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
+
+// Menú móvil
+const toggle = document.getElementById('nav-toggle');
+const menu = document.getElementById('nav-menu');
+
+function setMenu(open) {
+    header.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
 }
 
-// Eventos de Mouse
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    isMouseActive = true;
+toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+
+menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenu(false));
 });
 
-window.addEventListener('mouseout', () => {
-    isMouseActive = false;
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        toggle.focus();
+    }
 });
 
-window.addEventListener('resize', init);
+window.matchMedia('(min-width: 861px)').addEventListener('change', (e) => {
+    if (e.matches) setMenu(false);
+});
 
-// Iniciar
-init();
-animate();
+// Sección activa en la navegación
+const navLinks = [...document.querySelectorAll('.nav-links a')];
+const sections = navLinks
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
 
-// Menú Hamburguesa
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('nav-links');
-
-if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
-
-    // Cerrar menú al hacer click en un enlace
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((link) => {
+                const active = link.getAttribute('href') === `#${entry.target.id}`;
+                if (active) link.setAttribute('aria-current', 'true');
+                else link.removeAttribute('aria-current');
+            });
         });
+    },
+    { rootMargin: '-45% 0px -50% 0px' }
+);
+sections.forEach((section) => observer.observe(section));
+
+// Copiar el mail
+const copyBtn = document.querySelector('[data-copy]');
+const copyStatus = document.getElementById('copy-status');
+
+if (copyBtn) {
+    const label = copyBtn.querySelector('.copy-label');
+    let resetTimer;
+
+    copyBtn.addEventListener('click', async () => {
+        const text = copyBtn.dataset.copy;
+        try {
+            await navigator.clipboard.writeText(text);
+            copyBtn.classList.add('is-copied');
+            label.textContent = 'Copiado';
+            copyStatus.textContent = 'Mail copiado al portapapeles';
+        } catch {
+            label.textContent = 'No se pudo copiar';
+            copyStatus.textContent = 'No se pudo copiar. Seleccioná el mail y copialo a mano.';
+        }
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+            copyBtn.classList.remove('is-copied');
+            label.textContent = 'Copiar';
+            copyStatus.textContent = '';
+        }, 2400);
     });
 }

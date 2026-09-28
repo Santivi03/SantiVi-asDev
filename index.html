@@ -1,236 +1,287 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desarrollador Web Freelance | Portafolio</title>
-    <meta name="description" content="Portafolio de desarrollador web freelance. Creando experiencias web futuristas y modernas.">
+    <title>Santi Viñas · Desarrollador full stack freelance</title>
+    <meta name="description" content="Santi Viñas, desarrollador full stack en Buenos Aires. Páginas web, apps y automatizaciones para emprendedores y pymes.">
+    <meta name="theme-color" content="#07090D">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:title" content="Santi Viñas · Desarrollador full stack freelance">
+    <meta property="og:description" content="Páginas web, apps y automatizaciones para emprendedores y pymes.">
+    <meta property="og:url" content="https://santivi03.github.io/SantiVi-asDev/">
+    <meta property="og:image" content="https://santivi03.github.io/SantiVi-asDev/img/og.jpg">
+    <link rel="canonical" href="https://santivi03.github.io/SantiVi-asDev/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307090D'/%3E%3Cpath d='M9 9h4M9 9v4M23 23h-4M23 23v-4' stroke='%233DAEFF' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23EDF1F7'/%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="starfield"></canvas>
-    
-    <div class="content-wrapper">
-        <header>
-            <nav>
-                <div class="logo">DEV<span>.</span></div>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="#home">Inicio</a></li>
-                    <li><a href="#sobre-mi">Sobre Mí</a></li>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <canvas id="starfield" aria-hidden="true"></canvas>
+
+    <header class="site-header" id="site-header">
+        <nav class="nav container" aria-label="Principal">
+            <a href="#inicio" class="wordmark" aria-label="Santi Viñas, volver al inicio">
+                <svg class="wordmark-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 7h5M7 7v5M25 25h-5M25 25v-5" /><circle cx="16" cy="16" r="3" /></svg>
+                Santi Viñas
+            </a>
+
+            <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
+                <svg class="icon icon-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                <svg class="icon icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#proyectos">Proyectos</a></li>
                     <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#experiencia">Experiencia</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Proyectos</a></li>
-                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="#sobre-mi">Sobre mí</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                 </ul>
-            </nav>
-        </header>
+                <a class="btn btn-primary btn-sm" href="#contacto">Escribime</a>
+            </div>
+        </nav>
+    </header>
 
-        <main>
-            <section id="home" class="hero">
-                <div class="hero-content glass-panel">
-                    <h1 class="glitch-text" data-text="Santi Viñas">Santi Viñas</h1>
-                    <h2 class="subtitle">Desarrollador Full Stack</h2>
-                    <p>Capital Federal, Argentina.<br>Transformando ideas en experiencias digitales del futuro. Especialista en crear soluciones robustas con diseños inmersivos y lógica de negocio sólida.</p>
-                    <a href="#sobre-mi" class="btn-primary">Conóceme más</a>
+    <main id="main">
+        <section class="hero container" id="inicio" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <h1 id="hero-title">Páginas web, apps y automatizaciones para emprendedores y pymes.</h1>
+                <p class="hero-lead">Soy Santi Viñas, desarrollador full stack en Buenos Aires. Me encargo del proyecto entero, del diseño a la publicación, y hablás conmigo de principio a fin.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+                    <a class="btn btn-secondary" href="#contacto">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg>
+                        Escribime
+                    </a>
                 </div>
-            </section>
+                <p class="status"><span class="status-dot" aria-hidden="true"></span>Disponible para proyectos freelance y ofertas de trabajo</p>
+            </div>
 
-            <section id="sobre-mi" class="about">
-                <h2 class="section-title">Sobre Mí</h2>
-                <div class="about-container glass-panel">
-                    <div class="about-image">
-                        <div class="profile-frame">
-                            <img src="profile.jpg" alt="Santi Viñas" class="profile-pic">
-                        </div>
+            <figure class="hero-media frame frame-duo" data-reveal>
+                <span class="frame-corners" aria-hidden="true"></span>
+                <img src="img/futsal-desktop.webp" width="1600" height="1000" alt="Inicio de Futsal Pro en escritorio: último partido Dock Sud contra Boca y accesos a plantel, entrenamientos y jugadas" fetchpriority="high">
+                <img class="duo-phone" src="img/futsal-mobile-inicio.webp" width="585" height="1266" alt="La misma pantalla de inicio en el celular">
+                <figcaption class="frame-bar">
+                    <span>futsal-pro-tau.vercel.app</span>
+                    <span>React · Supabase · PWA</span>
+                </figcaption>
+            </figure>
+        </section>
+
+        <section class="section container" id="proyectos" aria-labelledby="proyectos-title">
+            <header class="section-head">
+                <h2 id="proyectos-title">Proyectos</h2>
+                <p>Trabajos para clientes y proyectos propios. Los que están en línea tienen el sitio y el código a un clic.</p>
+            </header>
+
+            <article class="project project-featured" aria-labelledby="p-futsal">
+                <figure class="project-media frame phone-gallery">
+                    <span class="frame-corners" aria-hidden="true"></span>
+                    <ul class="phones">
+                        <li>
+                            <img src="img/futsal-mobile-plantel.webp" width="585" height="1266" alt="Plantel: lista de jugadores con número y posición, y botón para agregar jugador" loading="lazy">
+                            <span>Plantel</span>
+                        </li>
+                        <li>
+                            <img src="img/futsal-mobile-reportes.webp" width="585" height="1266" alt="Reportes: resultados de los partidos contra Boca y Unión Ezpeleta" loading="lazy">
+                            <span>Reportes</span>
+                        </li>
+                        <li>
+                            <img src="img/futsal-mobile-pizarra.webp" width="585" height="1266" alt="Jugadas: jugadas guardadas de córner y lateral" loading="lazy">
+                            <span>Jugadas</span>
+                        </li>
+                    </ul>
+                    <figcaption class="frame-bar">
+                        <span>Versión celular</span>
+                        <span>390 × 844</span>
+                    </figcaption>
+                </figure>
+                <div class="project-body">
+                    <h3 id="p-futsal">Futsal Pro</h3>
+                    <p class="project-meta">Proyecto propio · App web instalable</p>
+                    <p>Una app para cargar lo que pasa en un partido de futsal mientras se juega. El DT arma el plantel, registra cada acción sobre el mapa de la cancha y después revisa las estadísticas.</p>
+                    <ul class="feature-list">
+                        <li>Registro de acciones en vivo sobre la cancha</li>
+                        <li>Pizarra táctica para armar jugadas</li>
+                        <li>Plantel, entrenamientos y asistencia</li>
+                        <li>Reportes de cada partido en PDF</li>
+                        <li>Guarda los datos en el dispositivo y los sincroniza con la nube</li>
+                    </ul>
+                    <ul class="stack" aria-label="Tecnologías">
+                        <li>React</li><li>Vite</li><li>Tailwind</li><li>Zustand</li><li>Supabase</li><li>Dexie</li><li>PWA</li>
+                    </ul>
+                    <div class="project-links">
+                        <a class="text-link" href="https://futsal-pro-tau.vercel.app/" target="_blank" rel="noopener noreferrer">Abrir la app<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg></a>
+                        <a class="text-link" href="https://github.com/Santivi03/Futsal-tracker" target="_blank" rel="noopener noreferrer">Ver código<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg></a>
                     </div>
-                    <div class="about-text">
-                        <p>¡Hola! Soy <strong>Santiago Viñas</strong>, Desarrollador Full Stack radicado en Capital Federal, Argentina.</p>
-                        <p>Como futuro Licenciado en Gestión de TI, mi enfoque siempre está en construir productos que combinen una lógica sólida de backend con una gran visión de negocio. Ya sea modelando la arquitectura de un proyecto complejo o implementando software corporativo como consultor IT, disfruto el desafío de optimizar procesos.</p>
-                        <p>Me muevo con agilidad entre el desarrollo técnico, el análisis de datos y la gestión tecnológica.</p>
-                        <p>Cuando no estoy en la computadora, probablemente me encuentres en una cancha de futsal o diseñando la identidad visual y las camisetas de mi equipo. Creo firmemente que la visión de juego en la cancha, la creatividad del diseño y la capacidad de resolver problemas técnicos se complementan a la perfección a la hora de trabajar en equipo.</p>
-                    </div>
+                    <p class="project-note">Para entrar hay que crear una cuenta gratis.</p>
                 </div>
-            </section>
+            </article>
 
-            <section id="servicios" class="services">
-                <h2 class="section-title">Mis Servicios</h2>
-                <div class="services-grid">
-                    <div class="service-card glass-panel">
-                        <div class="service-icon">💻</div>
-                        <h3>Desarrollo Web Full Stack</h3>
-                        <p>Creación de aplicaciones robustas, desde la interfaz de usuario inmersiva hasta la lógica sólida de backend.</p>
+            <div class="project-pair">
+                <article class="project" aria-labelledby="p-mimarse">
+                    <figure class="project-media frame frame-duo">
+                        <span class="frame-corners" aria-hidden="true"></span>
+                        <img src="img/mimarse.webp" width="1600" height="1000" alt="Inicio del sitio de Mimarse Estudio en escritorio, con la foto del equipo" loading="lazy">
+                        <img class="duo-phone" src="img/mimarse-mobile.webp" width="600" height="1298" alt="" loading="lazy">
+                    </figure>
+                    <div class="project-body">
+                        <h3 id="p-mimarse">Mimarse Estudio</h3>
+                        <p class="project-meta">Cliente · Sitio web</p>
+                        <p>Sitio para un estudio de pilates y entrenamiento funcional con dos sedes en Villa del Parque. Cada sede tiene su grilla de horarios, que en el celular se achica para verse entera, y un botón directo a WhatsApp para consultar.</p>
+                        <ul class="stack" aria-label="Tecnologías">
+                            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>GitHub Pages</li>
+                        </ul>
+                        <div class="project-links">
+                            <a class="text-link" href="https://santivi03.github.io/Mimarse/" target="_blank" rel="noopener noreferrer">Ver sitio<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg></a>
+                            <a class="text-link" href="https://github.com/Santivi03/Mimarse" target="_blank" rel="noopener noreferrer">Ver código<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg></a>
+                        </div>
                     </div>
-                    <div class="service-card glass-panel">
-                        <div class="service-icon">🎨</div>
-                        <h3>Diseño y Branding</h3>
-                        <p>Diseño de identidad visual, escudos corporativos, creatividades para redes y experiencias UI/UX únicas.</p>
-                    </div>
-                    <div class="service-card glass-panel">
-                        <div class="service-icon">⚙️</div>
-                        <h3>Optimización IT</h3>
-                        <p>Análisis, mejora de rendimiento de software existente y automatización de procesos operativos.</p>
-                    </div>
-                    <div class="service-card glass-panel">
-                        <div class="service-icon">📊</div>
-                        <h3>Consultoría de Negocios</h3>
-                        <p>Nexo técnico-negocio. Implementación de software corporativo y creación de dashboards para la toma de decisiones.</p>
-                    </div>
-                </div>
-            </section>
+                </article>
 
-            <section id="experiencia" class="experience">
-                <h2 class="section-title">Experiencia</h2>
-                <div class="timeline">
-                    <div class="timeline-item glass-panel">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">Presente</div>
-                        <div class="timeline-content">
-                            <h3>Desarrollador Full Stack & Consultor</h3>
-                            <h4>Proyectos Freelance & Independientes</h4>
-                            <p>Desarrollo de sitios web interactivos, diseño de UI/UX, e-commerce y aplicaciones de gestión táctica. Actúo como puente entre requerimientos de negocio y soluciones tecnológicas avanzadas.</p>
+                <article class="project" aria-labelledby="p-mili">
+                    <figure class="project-media frame frame-duo">
+                        <span class="frame-corners" aria-hidden="true"></span>
+                        <img src="img/miliaromas.webp" width="1600" height="1000" alt="Inicio de Mili Aromas en escritorio: título Amor en aromas y fotos del difusor de 200 ml y el spray de 250 ml" loading="lazy">
+                        <img class="duo-phone" src="img/miliaromas-mobile.webp" width="585" height="1266" alt="" loading="lazy">
+                    </figure>
+                    <div class="project-body">
+                        <h3 id="p-mili">Mili Aromas</h3>
+                        <p class="project-meta">Cliente · Tienda online</p>
+                        <p>Catálogo con carrito para un emprendimiento de difusores y perfumes ambientales. Elegís producto y aroma, armás el pedido y se abre WhatsApp con todo escrito. Está pensado para quien llega desde Instagram con el celular.</p>
+                        <ul class="stack" aria-label="Tecnologías">
+                            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>GitHub Pages</li>
+                        </ul>
+                        <div class="project-links">
+                            <a class="text-link" href="https://santivi03.github.io/MiliAromas/" target="_blank" rel="noopener noreferrer">Ver sitio<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg></a>
+                            <a class="text-link" href="https://github.com/Santivi03/MiliAromas" target="_blank" rel="noopener noreferrer">Ver código<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9" /></svg></a>
                         </div>
                     </div>
-                    <div class="timeline-item glass-panel">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">Reciente</div>
-                        <div class="timeline-content">
-                            <h3>Consultor de Software Corporativo</h3>
-                            <h4>Sector Financiero / Home Banking</h4>
-                            <p>Participación en la implementación y optimización de plataformas de gestión financiera. Análisis de requerimientos complejos y mejora continua de procesos internos mediante automatización.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item glass-panel">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">Continuo</div>
-                        <div class="timeline-content">
-                            <h3>Diseñador & Estratega Digital</h3>
-                            <h4>Gestión Deportiva & Marcas</h4>
-                            <p>Desarrollo de identidad visual completa (branding, camisetas, escudos) y creación de contenido dinámico para redes sociales, sumado a la estrategia y análisis de métricas.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </article>
+            </div>
+        </section>
 
-            <section id="skills" class="skills">
-                <h2 class="section-title">Habilidades Técnicas</h2>
-                <div class="skills-container glass-panel">
-                    <div class="skill-category">
-                        <h3>👨‍💻 Lenguajes</h3>
-                        <div class="chips">
-                            <span class="chip">Java</span>
-                            <span class="chip">Python</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>🗄️ Bases de Datos</h3>
-                        <div class="chips">
-                            <span class="chip">SQL</span>
-                            <span class="chip">NoSQL</span>
-                            <span class="chip">MongoDB</span>
-                            <span class="chip">Cassandra</span>
-                            <span class="chip">Redis</span>
-                            <span class="chip">Neo4j</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>📈 Herramientas & Data</h3>
-                        <div class="chips">
-                            <span class="chip">Power BI</span>
-                            <span class="chip">Git / GitHub</span>
-                            <span class="chip">APIs REST</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <section class="section container" id="servicios" aria-labelledby="servicios-title">
+            <header class="section-head">
+                <h2 id="servicios-title">Qué puedo hacer por tu negocio</h2>
+                <p>Tres tipos de trabajo, siempre con el mismo método: primero entiendo cómo funciona tu negocio y después escribo código.</p>
+            </header>
 
-            <section id="projects" class="projects">
-                <h2 class="section-title">Proyectos Destacados</h2>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <article class="project-card glass-panel">
-                        <div class="project-image" style="background-image: url('futsalpro.png');"></div>
-                        <div class="project-info">
-                            <h3>Futsal Pro - Mapa Táctico</h3>
-                            <p>Plataforma avanzada de mapeo y análisis táctico para futsal. Permite el posicionamiento interactivo de jugadores (drag-and-drop), registro detallado de jugadas, y gestión de acciones en tiempo real a través de un panel de control centralizado.</p>
-                            <div class="tech-stack">
-                                <span>JavaScript</span>
-                                <span>React</span>
-                                <span>Lógica de Estado</span>
-                            </div>
-                        </div>
-                    </article>
-                    
-                    <!-- Project 2 -->
-                    <article class="project-card glass-panel">
-                        <div class="project-image" style="background-image: url('mimarse.png');"></div>
-                        <div class="project-info">
-                            <h3>Mimarse Estudio</h3>
-                            <p>Sitio web completamente responsivo para un estudio de Pilates. Incluye una arquitectura optimizada y un diseño elegante centrado en la conversión y usabilidad en móviles.</p>
-                            <div class="tech-stack">
-                                <span>HTML/CSS</span>
-                                <span>Mobile First</span>
-                                <span>Diseño Fluido</span>
-                            </div>
-                        </div>
-                    </article>
+            <ol class="services">
+                <li class="service">
+                    <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M7 6.5h.01M10 6.5h.01" /></svg>
+                    <h3>Páginas web</h3>
+                    <p>Sitios para tu emprendimiento o empresa que cargan rápido, se ven bien en el celular y llevan a la gente a escribirte.</p>
+                    <a class="text-link" href="#p-mimarse">Ejemplo: Mimarse Estudio</a>
+                </li>
+                <li class="service">
+                    <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2" /><path d="M11 18h2" /></svg>
+                    <h3>Apps a medida</h3>
+                    <p>Herramientas web para lo que hoy resolvés en papel o en planillas: registros, turnos, stock, reportes. Se instalan en el celular y funcionan con mala señal.</p>
+                    <a class="text-link" href="#p-futsal">Ejemplo: Futsal Pro</a>
+                </li>
+                <li class="service">
+                    <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5" /><circle cx="18" cy="18" r="2.5" /><path d="M8.5 6H14a4 4 0 0 1 4 4v5.5M15.5 18H10a4 4 0 0 1-4-4V8.5" /></svg>
+                    <h3>Automatizaciones</h3>
+                    <p>Conecto las herramientas que ya usás para que las tareas repetidas se hagan solas: formularios que cargan una planilla, avisos por mail, reportes que se arman sin copiar y pegar.</p>
+                </li>
+            </ol>
+        </section>
 
-                    <!-- Project 3 -->
-                    <article class="project-card glass-panel">
-                        <div class="project-image" style="background-image: url('miliaromas.png');"></div>
-                        <div class="project-info">
-                            <h3>Mili Aromas</h3>
-                            <p>Catálogo digital y tienda enfocada en la estética visual para productos de aromaterapia. Experiencia de usuario diseñada para transmitir relajación y estilo.</p>
-                            <div class="tech-stack">
-                                <span>E-Commerce</span>
-                                <span>UI/UX</span>
-                                <span>Diseño Visual</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
+        <section class="section container about" id="sobre-mi" aria-labelledby="sobre-mi-title">
+            <figure class="about-photo frame">
+                <span class="frame-corners" aria-hidden="true"></span>
+                <img src="img/profile.webp" width="720" height="720" alt="Santi Viñas" loading="lazy">
+            </figure>
 
-            <section id="contact" class="contact">
-                <div class="contact-container glass-panel">
-                    <h2 class="section-title">Iniciemos un Proyecto</h2>
-                    <p>¿Listo para llevar tu presencia digital al siguiente nivel?</p>
-                    <div class="contact-info" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="mailto:santi.vinas00@gmail.com" class="contact-email">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            santi.vinas00@gmail.com
-                        </a>
-                        <a href="https://www.linkedin.com/in/santiago-vi%C3%B1as/" target="_blank" rel="noopener noreferrer" class="contact-email">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                            LinkedIn
-                        </a>
-                        <a href="https://github.com/Santivi03" target="_blank" rel="noopener noreferrer" class="contact-email">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                            GitHub
-                        </a>
+            <div class="about-copy">
+                <h2 id="sobre-mi-title">Sobre mí</h2>
+                <p>Soy Santiago Viñas, desarrollador full stack de Buenos Aires. Estudio la Licenciatura en Gestión de Tecnología de la Información en UADE y me recibo en diciembre de 2026.</p>
+                <p>Desde 2025 trabajo como freelance. Me gusta estar en todo el proceso: entender qué necesita el negocio, diseñar la interfaz, programar el backend y dejarlo publicado.</p>
+                <p>Fuera de la computadora juego al futsal y diseño la identidad visual y las camisetas de mi equipo. Futsal Pro junta las dos cosas.</p>
+
+                <dl class="record">
+                    <div>
+                        <dt>2025 — hoy</dt>
+                        <dd><strong>Desarrollador full stack freelance</strong>Webs y apps para clientes y proyectos propios</dd>
                     </div>
-                    <form class="contact-form">
-                        <input type="text" placeholder="Tu Nombre" required>
-                        <input type="email" placeholder="Tu Correo" required>
-                        <textarea placeholder="Cuéntame sobre tu proyecto" rows="4" required></textarea>
-                        <button type="submit" class="btn-primary" onclick="event.preventDefault(); alert('Mensaje simulado enviado con éxito.')">Enviar Mensaje</button>
-                    </form>
-                </div>
-            </section>
-        </main>
+                    <div>
+                        <dt>Egreso dic. 2026</dt>
+                        <dd><strong>Lic. en Gestión de Tecnología de la Información</strong>UADE</dd>
+                    </div>
+                </dl>
+            </div>
 
-        <footer>
-            <p>&copy; 2026 Desarrollador Web Freelance. Todos los derechos reservados.</p>
-        </footer>
-    </div>
+            <div class="skills">
+                <h3>Con qué trabajo</h3>
+                <dl class="skill-groups">
+                    <div>
+                        <dt>Frontend</dt>
+                        <dd>HTML, CSS, JavaScript, React, Tailwind CSS, Vite</dd>
+                    </div>
+                    <div>
+                        <dt>Backend</dt>
+                        <dd>Python, Java, FastAPI, APIs REST</dd>
+                    </div>
+                    <div>
+                        <dt>Datos</dt>
+                        <dd>SQL, PostgreSQL y Supabase, NoSQL, MongoDB, Redis, Cassandra, Neo4j</dd>
+                    </div>
+                    <div>
+                        <dt>Herramientas</dt>
+                        <dd>Git y GitHub, Vercel, GitHub Pages, Power BI</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="section container contact" id="contacto" aria-labelledby="contacto-title">
+            <h2 id="contacto-title">¿Tenés un proyecto en mente?</h2>
+            <p class="contact-lead">Contame qué necesitás y lo charlamos. También estoy abierto a propuestas de trabajo.</p>
+
+            <div class="contact-mail">
+                <a class="mail-link" href="mailto:santi.vinas00@gmail.com">santi.vinas00@gmail.com</a>
+                <button class="copy-btn" type="button" data-copy="santi.vinas00@gmail.com">
+                    <svg class="icon icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg>
+                    <svg class="icon icon-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                    <span class="copy-label">Copiar</span>
+                </button>
+                <span class="sr-only" role="status" id="copy-status"></span>
+            </div>
+
+            <ul class="contact-links">
+                <li>
+                    <a href="https://www.linkedin.com/in/santiago-vi%C3%B1as/" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+                        LinkedIn
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/Santivi03" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" /></svg>
+                        GitHub
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>© 2026 Santi Viñas · Buenos Aires, Argentina</p>
+            <a href="#inicio" class="text-link">Volver arriba</a>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
