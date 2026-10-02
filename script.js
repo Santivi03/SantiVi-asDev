@@ -171,3 +171,115 @@ if (copyBtn) {
         }, 2400);
     });
 }
+
+// Carrusel de proyectos del hero
+(function showcase() {
+    const root = document.querySelector('.showcase');
+    if (!root) return;
+
+    const slides = [...root.querySelectorAll('.slide')];
+    const dots = [...root.querySelectorAll('.showcase-dot')];
+    const toggleBtn = root.querySelector('.showcase-toggle');
+    const nameLink = root.querySelector('.showcase-name');
+    const title = root.querySelector('.showcase-title');
+    const url = root.querySelector('.showcase-url');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const DURATION = 5000;
+
+    let index = 0;
+    let timer = null;
+    let startedAt = 0;
+    let remaining = DURATION;
+    let stopped = reduceMotion.matches; // pausa elegida por la persona
+    const holds = new Set(); // pausas temporales: hover, foco, fuera de pantalla, pestaña oculta
+
+    root.style.setProperty('--slide-ms', `${DURATION}ms`);
+
+    function show(next) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+            const active = i === index;
+            slide.classList.toggle('is-active', active);
+            if (active) slide.removeAttribute('aria-hidden');
+            else slide.setAttribute('aria-hidden', 'true');
+        });
+        dots.forEach((dot, i) => {
+            if (i === index) dot.setAttribute('aria-current', 'true');
+            else dot.removeAttribute('aria-current');
+        });
+        const current = slides[index];
+        title.textContent = current.dataset.name;
+        url.textContent = current.dataset.url;
+        nameLink.setAttribute('href', current.dataset.href);
+        restartProgress();
+    }
+
+    // Reinicia la animación de la barrita del punto activo
+    function restartProgress() {
+        root.classList.remove('is-playing');
+        void root.offsetWidth;
+        if (!stopped) root.classList.add('is-playing');
+        remaining = DURATION;
+        schedule();
+    }
+
+    function schedule() {
+        clearTimeout(timer);
+        timer = null;
+        if (stopped || holds.size) return;
+        startedAt = performance.now();
+        timer = setTimeout(() => show(index + 1), remaining);
+    }
+
+    function hold(reason) {
+        if (holds.has(reason)) return;
+        holds.add(reason);
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+            remaining = Math.max(0, remaining - (performance.now() - startedAt));
+        }
+        root.classList.add('is-held');
+    }
+
+    function release(reason) {
+        if (!holds.delete(reason)) return;
+        if (holds.size) return;
+        root.classList.remove('is-held');
+        schedule();
+    }
+
+    function setStopped(value) {
+        stopped = value;
+        root.classList.toggle('is-stopped', stopped);
+        toggleBtn.setAttribute('aria-label', stopped ? 'Reanudar el carrusel' : 'Pausar el carrusel');
+        restartProgress();
+    }
+
+    dots.forEach((dot) => {
+        dot.addEventListener('click', () => show(Number(dot.dataset.index)));
+    });
+
+    toggleBtn.addEventListener('click', () => setStopped(!stopped));
+
+    root.addEventListener('mouseenter', () => hold('hover'));
+    root.addEventListener('mouseleave', () => release('hover'));
+    root.addEventListener('focusin', () => hold('focus'));
+    root.addEventListener('focusout', (e) => {
+        if (!root.contains(e.relatedTarget)) release('focus');
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) hold('hidden');
+        else release('hidden');
+    });
+
+    new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) release('offscreen');
+        else hold('offscreen');
+    }, { threshold: 0.25 }).observe(root);
+
+    reduceMotion.addEventListener('change', () => setStopped(reduceMotion.matches));
+
+    setStopped(stopped);
+})();
