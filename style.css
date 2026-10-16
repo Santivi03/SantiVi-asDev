@@ -116,7 +116,7 @@ ol {
     transform: none;
 }
 
-#starfield {
+#particle-field {
     position: fixed;
     inset: 0;
     width: 100%;
