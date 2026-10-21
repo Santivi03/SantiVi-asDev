@@ -686,6 +686,11 @@ p {
     object-position: left top;
 }
 
+.project-closing {
+    margin-top: clamp(72px, 9vw, 112px);
+    margin-bottom: 0;
+}
+
 .project-pair {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
