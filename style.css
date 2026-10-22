@@ -691,6 +691,10 @@ p {
     margin-bottom: 0;
 }
 
+.project-pair-closing {
+    margin-top: clamp(72px, 9vw, 112px);
+}
+
 .project-pair {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1352,7 +1356,17 @@ p {
 @media (max-width: 520px) {
     .frame-bar.showcase-bar {
         flex-direction: row;
-        gap: 8px;
+        flex-wrap: wrap;
+        gap: 0 8px;
+    }
+
+    .showcase-name {
+        flex: 1 1 100%;
+    }
+
+    .showcase-controls {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .showcase-dot {
