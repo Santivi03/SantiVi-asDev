@@ -22,7 +22,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=13">
+    <script>
+        // Entrada de proyectos al hacer scroll: solo si hay JS y movimiento permitido.
+        // Si script.js no confirma en 3 s, se quita la clase y todo queda visible.
+        (function () {
+            var root = document.documentElement;
+            if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            root.classList.add('js-reveal');
+            setTimeout(function () { if (!window.__revealReady) root.classList.remove('js-reveal'); }, 3000);
+        })();
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -197,7 +207,7 @@
                 <p>Trabajos para clientes y proyectos propios. Los que están en línea tienen el sitio y el código a un clic.</p>
             </header>
 
-            <article class="project project-featured" aria-labelledby="p-futsal">
+            <article class="project project-featured" aria-labelledby="p-futsal" data-from="split">
                 <figure class="project-media frame phone-gallery">
                     <span class="frame-corners" aria-hidden="true"></span>
                     <ul class="phones">
@@ -241,7 +251,7 @@
                 </div>
             </article>
 
-            <article class="project project-featured project-reverse" aria-labelledby="p-gordis">
+            <article class="project project-featured project-reverse" aria-labelledby="p-gordis" data-from="split-reverse">
                 <figure class="project-media frame frame-duo">
                     <span class="frame-corners" aria-hidden="true"></span>
                     <img src="img/gordis.webp" width="1600" height="1000" alt="Carta de Gordis Burger en escritorio: las hamburguesas Clásica, Tasti y Bacon con ingredientes y precios simple y doble" loading="lazy">
@@ -267,7 +277,7 @@
             </article>
 
             <div class="project-pair">
-                <article class="project" aria-labelledby="p-mimarse">
+                <article class="project" aria-labelledby="p-mimarse" data-from="left">
                     <figure class="project-media frame frame-duo">
                         <span class="frame-corners" aria-hidden="true"></span>
                         <img src="img/mimarse.webp" width="1600" height="1000" alt="Inicio del sitio de Mimarse Estudio en escritorio, con la foto del equipo" loading="lazy">
@@ -287,7 +297,7 @@
                     </div>
                 </article>
 
-                <article class="project" aria-labelledby="p-mili">
+                <article class="project project-late" aria-labelledby="p-mili" data-from="right">
                     <figure class="project-media frame frame-duo">
                         <span class="frame-corners" aria-hidden="true"></span>
                         <img src="img/miliaromas.webp" width="1600" height="1000" alt="Inicio de Mili Aromas en escritorio: título Amor en aromas y fotos del difusor de 200 ml y el spray de 250 ml" loading="lazy">
@@ -308,7 +318,7 @@
                 </article>
             </div>
 
-            <article class="project project-featured project-closing" aria-labelledby="p-azz">
+            <article class="project project-featured project-closing" aria-labelledby="p-azz" data-from="zoom">
                 <figure class="project-media frame frame-duo">
                     <span class="frame-corners" aria-hidden="true"></span>
                     <img src="img/azz.webp" width="1600" height="1000" alt="Portada del sitio de AZZ en escritorio con el cartel En vivo sobre la transmisión del programa CEF" loading="lazy">
@@ -335,7 +345,7 @@
             </article>
 
             <div class="project-pair project-pair-closing">
-                <article class="project" aria-labelledby="p-panini">
+                <article class="project" aria-labelledby="p-panini" data-from="top">
                     <figure class="project-media frame frame-duo">
                         <span class="frame-corners" aria-hidden="true"></span>
                         <img src="img/panini.webp" width="1600" height="1000" alt="Portada de El Rey Del Panini en escritorio: título Autentici panini italiani y el logo del rey haciendo el gesto del chef" loading="lazy">
@@ -355,7 +365,7 @@
                     </div>
                 </article>
 
-                <article class="project" aria-labelledby="p-inmo">
+                <article class="project" aria-labelledby="p-inmo" data-from="bottom">
                     <figure class="project-media frame frame-duo">
                         <span class="frame-corners" aria-hidden="true"></span>
                         <img src="img/inmobiliaria.webp" width="1600" height="1000" alt="Portada de Monica Loffredo Propiedades en escritorio: buscador de propiedades en Villa Devoto y la foto de una casa dentro de un arco" loading="lazy">
@@ -495,6 +505,6 @@
         </div>
     </footer>
 
-    <script src="script.js?v=5"></script>
+    <script src="script.js?v=7"></script>
 </body>
 </html>

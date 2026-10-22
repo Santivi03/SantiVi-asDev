@@ -366,3 +366,22 @@ if (copyBtn) {
 
     setStopped(stopped);
 })();
+
+// Entrada de proyectos al hacer scroll (la clase .js-reveal la pone el head)
+(function revealProjects() {
+    window.__revealReady = true;
+    const root = document.documentElement;
+    if (!root.classList.contains('js-reveal')) return;
+
+    const projects = document.querySelectorAll('[data-from]');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    projects.forEach((project) => observer.observe(project));
+})();

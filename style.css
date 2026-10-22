@@ -430,7 +430,7 @@ p {
     align-items: start;
     align-content: end;
     min-height: min(100svh, 980px);
-    padding-top: calc(var(--header-h) + clamp(48px, 8vw, 104px));
+    padding-top: calc(var(--header-h) + clamp(8px, 1vw, 12px));
     padding-bottom: clamp(56px, 8vw, 96px);
 }
 
@@ -1524,5 +1524,74 @@ p {
     .tech-list {
         gap: 32px;
         padding-right: 32px;
+    }
+}
+
+/* Entrada de proyectos al hacer scroll: cada uno llega desde un lado distinto
+   (data-from en el HTML). Solo con .js-reveal, que pone un script en el head;
+   sin JS o con "reducir movimiento" los proyectos se ven desde el principio. */
+/* Lo que entra de costado no tiene que agrandar la página */
+#proyectos {
+    overflow-x: clip;
+}
+
+.js-reveal [data-from] {
+    --d: 96px;
+}
+
+.js-reveal [data-from] .project-media,
+.js-reveal [data-from] .project-body {
+    transition: transform 1000ms var(--ease-out), opacity 800ms ease;
+}
+
+.js-reveal [data-from] .project-body {
+    transition-delay: 140ms;
+}
+
+.js-reveal [data-from="right"].project-late .project-media,
+.js-reveal [data-from="right"].project-late .project-body {
+    transition-delay: 180ms;
+}
+
+.js-reveal [data-from]:not(.is-in) .project-media,
+.js-reveal [data-from]:not(.is-in) .project-body {
+    opacity: 0;
+}
+
+.js-reveal [data-from="left"]:not(.is-in) .project-media,
+.js-reveal [data-from="left"]:not(.is-in) .project-body,
+.js-reveal [data-from="split"]:not(.is-in) .project-media,
+.js-reveal [data-from="split-reverse"]:not(.is-in) .project-body {
+    transform: translateX(calc(var(--d) * -1));
+}
+
+.js-reveal [data-from="right"]:not(.is-in) .project-media,
+.js-reveal [data-from="right"]:not(.is-in) .project-body,
+.js-reveal [data-from="split"]:not(.is-in) .project-body,
+.js-reveal [data-from="split-reverse"]:not(.is-in) .project-media {
+    transform: translateX(var(--d));
+}
+
+.js-reveal [data-from="top"]:not(.is-in) .project-media,
+.js-reveal [data-from="top"]:not(.is-in) .project-body {
+    transform: translateY(calc(var(--d) * -0.8));
+}
+
+.js-reveal [data-from="bottom"]:not(.is-in) .project-media,
+.js-reveal [data-from="bottom"]:not(.is-in) .project-body {
+    transform: translateY(calc(var(--d) * 0.8));
+}
+
+.js-reveal [data-from="zoom"]:not(.is-in) .project-media {
+    transform: scale(0.82);
+}
+
+.js-reveal [data-from="zoom"]:not(.is-in) .project-body {
+    transform: translateY(32px);
+}
+
+@media (max-width: 860px) {
+    .js-reveal [data-from] {
+        --d: 48px;
     }
 }
